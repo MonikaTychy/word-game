@@ -40,6 +40,5 @@ button {
 
 button:disabled {
     cursor: not-allowed;
-    background: #a80020;
 }
 
