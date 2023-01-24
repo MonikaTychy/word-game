@@ -1,39 +1,15 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React from 'react'
+import useWordGame from './useWordGame'
 
 function App() {
-    const [text, setText] = useState("")
-    const [timer, setTimer] = useState(5)
-    const [isTimeRemaning, setIsTimeRemaning] = useState(false)
-    const [wordsCount, setWordCounts] = useState(0)
-    const textareaRef = useRef(null)
-
-    useEffect(() => {
-      if(timer > 0 && isTimeRemaning){
-        setTimeout(() => {
-          setTimer(prevTimer => prevTimer - 1)
-        }, 1000)
-      } else if (timer === 0) {
-        setIsTimeRemaning(false)
-        setWordCounts(countWords(text))
-      }
-    }, [timer, isTimeRemaning])
-
-    function startGame() {
-       setIsTimeRemaning(true)
-       setTimer(5)
-       setText("")
-       setWordCounts(0)
-       textareaRef.current.disabled = false
-       textareaRef.current.focus()
-    }
-
-   function handleChange(e) {
-       setText(e.target.value)
-   }
-
-   function countWords(str) {
-    return str === "" ? 0 : str.trim().split(" ").length
-    }
+    const {
+      text,
+      timer,
+      isTimeRemaning,
+      wordsCount,
+      textareaRef,
+      startGame,
+      handleChange} = useWordGame(15)
 
   return (
     <div className="App">
